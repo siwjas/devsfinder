@@ -1,23 +1,45 @@
-import React from 'react';
+import React from 'react'
+import './global.css'
+import './App.css'
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          <h2> Hello React!! </h2>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app">
+      <aside>
+        <strong>Cadastre-se</strong>
+        <form>
+          <div class="input-block">
+            <label htmlFor="github_username">Usuário do Github</label>
+            <input name="github_username" id="github_username" required />
+          </div>
+          
+          <div className="input-block">
+            <label htmlFor="techs">Tecnologias</label>
+            <input name="techs" id="techs" required />
+          </div>
+          
+          <div className="input-group">
+            <div className="input-block">
+              <label htmlFor="latitude">Latitude</label>
+              <input name="latitude" id="latitude" required />
+            </div>
+
+            <div className="input-block">
+            <label htmlFor="longitude">Longitude</label>
+              <input name="longitude" id="longitude" required />
+            </div>              
+          </div>
+
+          <button type="submit">Salvar</button>       
+        </form>
+      </aside>
+
+      <main>
+
+      </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
