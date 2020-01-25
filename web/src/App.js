@@ -4,10 +4,14 @@ import './global.css'
 import './Sidebar.css'
 import './Main.css'
 import './App.css'
+import api from './services/api'
+
 
 function App() {
   const [latitude, setLatitude]   = useState('')
   const [longitude, setLongitude] = useState('')
+  const [github_username, setGithubUsername] = useState('')
+  const [techs, setTechs] = useState('')
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -25,41 +29,66 @@ function App() {
     )
   }, [])
 
+  async function hadleAddDev(e) {
+    e.preventDefault()
+
+    const response = await api.post('/devs', {
+      github_username,
+      techs,
+      latitude,
+      longitude,
+    })
+
+    console.log(response.data)
+  }
+
   return (
     <div id="app">
       <aside>
         <strong>Cadastre-se</strong>
-        <form>
+        <form onSubmit={hadleAddDev}>
           <div className="input-block">
             <label htmlFor="github_username">Usuário do Github</label>
-            <input name="github_username" id="github_username" required />
+            <input 
+              name="github_username" 
+              d="github_username" 
+              required 
+              value={github_username} 
+              onChange={e => setGithubUsername(e.target.value)}
+            />
           </div>
           
           <div className="input-block">
             <label htmlFor="techs">Tecnologias</label>
-            <input name="techs" id="techs" required />
+            <input 
+              name="techs" 
+              id="techs" 
+              required 
+              value={techs} 
+              onChange={e => setTechs(e.target.value)}
+            />
           </div>
           
           <div className="input-group">
             <div className="input-block">
               <label type="number" htmlFor="latitude">Latitude</label>
               <input 
-              name="latitude" 
-              id="latitude" 
-              required 
-              value={latitude} 
-              onChange={e => setLatitude(e.target.value)}
+                name="latitude" 
+                id="latitude" 
+                required 
+                value={latitude} 
+                onChange={e => setLatitude(e.target.value)}
               />
             </div>
 
             <div className="input-block">
             <label type="number" htmlFor="longitude">Longitude</label>
               <input 
-              name="longitude" 
-              id="longitude" 
-              required 
-              value={longitude} 
-              onChange={e => setLongitude(e.target.value)}
+                name="longitude" 
+                id="longitude" 
+                required 
+                value={longitude} 
+                onChange={e => setLongitude(e.target.value)}
               />
             </div>              
           </div>
